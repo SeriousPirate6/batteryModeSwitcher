@@ -1,5 +1,6 @@
 @echo off
 
+@REM powercfg /L # to see all the power management profiles
 @REM powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
 
 @REM High perf: 9df557d5-8a11-42bf-88e4-c9737e89d41d
@@ -20,7 +21,6 @@ goto start
 timeout /t "%interval%" /nobreak>nul
 
 ENDLOCAL
-
 set startingSaving=75
 set interval=5
 
