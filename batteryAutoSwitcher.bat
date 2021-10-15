@@ -14,8 +14,17 @@
 @REM powercfg -S SCHEME_MAX #Activates the (Max-Energie-Saving) Scheme with the alias SCHEME_MAX
 @REM powercfg -S SCHEME_BALANCED # ... Balanced Energie Scheme
 
+goto start
+
+:repeat
+timeout /t "%interval%" /nobreak>nul
+
+ENDLOCAL
+
+set startingSaving=75
+set interval=5
+
 :start
-timeout /t 5 /nobreak>nul
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 SET count=1
@@ -35,22 +44,19 @@ if "%chargingType%"=="1" (
 
 	set /a batteryRem="%var2%"
 
-	if "%batteryRem%" LSS "75" (
+	if "%batteryRem%" LSS "%startingSaving%" (
 		echo Activating battery saving...
 		@REM powercfg -S SCHEME_MAX
-		ENDLOCAL
-		goto start
+		goto repeat
 	) else (
-		echo Battery more than 75%.
-		ENDLOCAL
-		goto start
+		echo Battery more than %startingSaving%%%.
+		goto repeat
 	)
 )
 
 if "%chargingType%"=="2" (
 	echo Battery on charge.
-	ENDLOCAL
-	goto start
+	goto repeat
 )
 
 REM echo *****************************
