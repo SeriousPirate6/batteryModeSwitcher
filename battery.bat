@@ -14,6 +14,9 @@
 @REM powercfg -S SCHEME_MAX #Activates the (Max-Energie-Saving) Scheme with the alias SCHEME_MAX
 @REM powercfg -S SCHEME_BALANCED # ... Balanced Energie Scheme
 
+:start
+timeout /t 5 /nobreak>nul
+
 SETLOCAL ENABLEDELAYEDEXPANSION
 SET count=1
 FOR /F "tokens=* USEBACKQ" %%F IN (`WMIC Path Win32_Battery Get BatteryStatus`) DO (
@@ -35,21 +38,25 @@ if "%chargingType%"=="1" (
 	if "%batteryRem%" LSS "75" (
 		echo Activating battery saving...
 		@REM powercfg -S SCHEME_MAX
+		ENDLOCAL
+		goto start
 	) else (
 		echo Battery more than 75%.
+		ENDLOCAL
+		goto start
 	)
 )
 
 if "%chargingType%"=="2" (
 	echo Battery on charge.
+	ENDLOCAL
+	goto start
 )
-
-ENDLOCAL
 
 REM echo *****************************
 REM echo * Battery balanced mode: ON *
 REM echo *****************************
 
-REM timeout /t 1 /nobreak>nul
+timeout /t 2 /nobreak>nul
 
-pause>nul
+exit
