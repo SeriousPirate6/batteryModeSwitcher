@@ -1,0 +1,21 @@
+                                            --- CMD battery related commands ---
+
+
+powercfg /L # to see all the power management profiles
+    GUID combinazione risparmio energia: 381b4222-f694-41f0-9685-ff5bb260df2e  (Bilanciato) *
+    GUID combinazione risparmio energia: 9df557d5-8a11-42bf-88e4-c9737e89d41d  (Prestazioni eccellenti)
+
+powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e
+    High perf: 9df557d5-8a11-42bf-88e4-c9737e89d41d
+    Balanced:  381b4222-f694-41f0-9685-ff5bb260df2e
+
+WMIC Path Win32_Battery Get BatteryStatus
+    1 - not in charge
+    2 - in charge
+
+WMIC PATH Win32_Battery Get EstimatedChargeRemaining
+
+powercfg -ALIASES # Lists named aliases for available profiles.
+powercfg -S SCHEME_MIN #Activates the (High-Performance) Scheme with the alias SCHEME_MIN
+powercfg -S SCHEME_MAX #Activates the (Max-Energie-Saving) Scheme with the alias SCHEME_MAX
+powercfg -S SCHEME_BALANCED # ... Balanced Energie Scheme
