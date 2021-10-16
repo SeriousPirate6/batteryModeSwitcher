@@ -38,12 +38,12 @@ if "%chargingType%"=="1" (
 	if "%batteryRem%" LSS "%startingSaving%" (
 		echo Activating battery saving... Battery lasting: %batteryRem% Start saving at: %startingSaving%
 		@REM powercfg -S SCHEME_MAX
-		ECHO %date% -%time%: Switch to saving battery profile>>"%logPath%\%dd%.log"
+		ECHO %date%-%time%: Switch to saving battery profile>>"%logPath%\%dd%.log"
 		goto repeat
 	) else (
 		if not [%startingSaving%] == [] (
 			echo Battery more than %startingSaving%%%.
-			ECHO %date% -%time%: Battery more than %startingSaving%%%>>"%logPath%\%dd%.log"
+			ECHO %date%-%time%: Battery more than %startingSaving%%%>>"%logPath%\%dd%.log"
 		)
 		goto repeat
 	)
@@ -51,7 +51,7 @@ if "%chargingType%"=="1" (
 
 if "%chargingType%"=="2" (
 	echo Battery on charge.
-	ECHO %date% -%time%: Battery on charge>>"%logPath%\%dd%.log"
+	ECHO %date%-%time%: Battery on charge>>"%logPath%\%dd%.log"
 	goto repeat
 )
 
