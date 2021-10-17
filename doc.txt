@@ -15,7 +15,17 @@ WMIC Path Win32_Battery Get BatteryStatus
 
 WMIC PATH Win32_Battery Get EstimatedChargeRemaining
 
+powercfg /GETACTIVECHEME    ->  check what scheme is actually in use.
+powercfg /ALIASES           ->  lists names and ids of the battery saving profiles.
+
 powercfg -ALIASES # Lists named aliases for available profiles.
 powercfg -S SCHEME_MIN #Activates the (High-Performance) Scheme with the alias SCHEME_MIN
 powercfg -S SCHEME_MAX #Activates the (Max-Energie-Saving) Scheme with the alias SCHEME_MAX
 powercfg -S SCHEME_BALANCED # ... Balanced Energie Scheme
+
+
+                - SCHEMES -
+
+381b4222-f694-41f0-9685-ff5bb260df2e - balanced
+9df557d5-8a11-42bf-88e4-c9737e89d41d - max Performance
+a1841308-3541-4fab-bc81-f71556f20b4a - battery saving
